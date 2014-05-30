@@ -1,0 +1,62 @@
+== The environment ==
+
+Platform tested : Mac OS X 10.7 64bit on a minion, Mac OSX  on MacBookAir
+Monitors supported :
+	TRu 22" monitor (vid = 0x0eef, pid = 0x7224)
+	TRu 19" monitor (vid = 0x0eef, pid = 0x72c4)
+	TRu 15" monitor (vid = 0x0eef, pid = 0x72d0)
+Requirements : Java Run Time
+   
+== Connect the monitor to Mac computer ==
+
+== Prepare the codeless kext ==
+(This step disables the default mouse driver for the touch screen)
+
+* Make eeti.kext directory inside /System/Library/Extensions
+
+ sudo mkdir -p /System/Library/Extensions/eeti.kext/Contents
+
+* Put the file "Info.plist" in the directory /System/Library/Extensions/eeti.kext/Contents
+
+ sudo cp Info.plist /System/Library/Extensions/eeti.kext/Contents
+
+* Touch the directory /System/Library/Extensions to reload the kext
+
+ sudo touch /System/Library/Extensions
+
+* Reboot the Mac computer...
+
+== Uninstall EETI official driver ==
+If the EETI driver was installed previously, it needs to be disabled
+
+* Change directory into /System/Library/Extensions/CUSBInterface.kext/Contents
+
+ cd /System/Library/Extensions/CUSBInterface.kext/Contents
+
+* Change the Info.plist into Info.plist.orig
+
+ sudo mv Info.plist Info.plist.orig
+
+* Touch the directory /System/Library/Extensions to reload the kext
+
+ sudo touch /System/Library/Extensions
+
+* Reboot the Mac computer...
+
+== Run TUIO ==
+
+* Copy the file libSDL-1.2.0.dylib into directory /opt/local/lib
+
+ sudo mkdir -p /opt/local/lib
+ sudo cp libSDK-1.2.0.dylib /opt/local/lib
+
+* Run SimpleSimulator :
+
+ sudo ./SimpleSimulator 22 v
+
+22 means what type of monitor you are using... use 22 for 22" monitor, 19 for 19", 15 for 15"
+v is optional for more verbose output
+
+* Start TuioDemo.jar from the Finder
+* Press F1 on the screen of TuioDemo, to make it full screen
+* Enjoy... 
